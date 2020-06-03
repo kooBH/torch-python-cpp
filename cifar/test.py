@@ -23,7 +23,7 @@ if __name__ == '__main__':
     # 이미지를 출력합니다.
     #print('GroundTruth: ', ' '.join('%5s' % classes[labels[j]] for j in range(4)))
 
-    net = Net.GetNet()
+    net = Net.ResNet18()
     net.load_state_dict(torch.load('save/cifar_state.pt'))
     net.cuda()
 

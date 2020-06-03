@@ -21,9 +21,6 @@ class Net(nn.Module):
         x = self.fc3(x)
         return x
 
-def GetNet():
-    return Net()
-
 class BasicBlock(nn.Module):
     expansion = 1
 

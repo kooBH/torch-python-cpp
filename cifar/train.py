@@ -26,7 +26,7 @@ if __name__ == '__main__':
     # Network
 
     #net = Net.GetNet()
-    net =  models.resnet18()
+    net =  Net.ResNet18()
     net.cuda()
 
     criterion = nn.CrossEntropyLoss().cuda()
