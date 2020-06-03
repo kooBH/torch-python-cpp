@@ -20,7 +20,7 @@ class Net(nn.Module):
         x = F.relu(self.fc2(x))
         x = self.fc3(x)
         return x
-
+# https://github.com/kuangliu/pytorch-cifar/blob/master/models/resnet.py
 class BasicBlock(nn.Module):
     expansion = 1
 
