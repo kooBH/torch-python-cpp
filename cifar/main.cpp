@@ -52,7 +52,7 @@ int main(int argc, const char* argv[]) {
   try {
     // torch::jit::load()을 사용해 ScriptModule을 파일로부터 역직렬화
 //    module = torch::jit::load("../save/cifar10_resnet18_epoch10_state.pt");
-    module = torch::jit::load("../traced-eval.pt");
+    module = torch::jit::load("../traced-state.pt");
   }
   catch (const c10::Error& e) {
     std::cerr << "error loading the model\n"<<e.what();
@@ -64,6 +64,8 @@ int main(int argc, const char* argv[]) {
   // Input
   cv::Mat image;
   image = cv::imread("../pic/dog1.jpg", cv::IMREAD_COLOR);
+  // Resize image
+  cv::resize( image, image, cv::Size( 32,32 ));
 
   // Check for invalid input
   if(! image.data ) {
@@ -81,7 +83,6 @@ int main(int argc, const char* argv[]) {
 
   return 0;
 }
-
 
 at::Tensor imageToTensor(cv::Mat & image) {
     // BGR to RGB, which is what our network was trained on
@@ -106,14 +107,16 @@ void predict(torch::jit::script::Module & module, cv::Mat & image) {
     // Normalize
     struct Normalize normalizeChannels({0.4914, 0.4822, 0.4465}, {0.2023, 0.1994, 0.2010});
     tensorImage = normalizeChannels(tensorImage);
-    //std::cout << "Image tensor shape: " << tensorImage.sizes() << std::endl;
+    std::cout << "Image tensor shape: " << tensorImage.sizes() << std::endl;
 
     // Move tensor to CUDA memory
     tensorImage = tensorImage.to(at::kCUDA);
     // Forward pass
+    std::cout<<"forward"<<std::endl;
     at::Tensor result = module.forward({tensorImage}).toTensor();
     auto maxResult = result.max(1);
     auto maxIndex = std::get<1>(maxResult).item<float>();
     auto maxOut = std::get<0>(maxResult).item<float>();
     std::cout << "Predicted: " << classes[maxIndex] << " | " << maxOut << std::endl;
 }
+

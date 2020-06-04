@@ -33,7 +33,7 @@ if __name__ == '__main__':
     #optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
     optimizer = optim.Adam(net.parameters(), lr=0.001, betas=(0.9, 0.999))
 
-    for epoch in range(10):   # 데이터셋을 수차례 반복합니다.
+    for epoch in range(1):   # 데이터셋을 수차례 반복합니다.
 
         running_loss = 0.0
         for i, data in enumerate(trainloader, 0):
@@ -60,7 +60,7 @@ if __name__ == '__main__':
 
     print('Finished Training')
 
-    torch.save(net.state_dict(), 'save/cifar_state.pt')
-    torch.save(net,'save/cifar_net.pt')
+    torch.save(net.state_dict(), 'save/cifar10_resnet18_epoch1_state.pt')
+    torch.save(net,'save/cifar10_resnet18_epoch1_net.pt')
 
     print('Finished Saving')

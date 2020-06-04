@@ -11,10 +11,10 @@ list(APPEND INCL
 )
 
 list(APPEND LINKLIBS 
-  /usr/local/lib/libopencv_core.so.4.3.0
-  /usr/local/lib/libopencv_highgui.so.4.3.0
-  /usr/local/lib/libopencv_imgproc.so.4.3.0
-  /usr/local/lib/libopencv_imgcodecs.so.4.3.0
+  /usr/local/lib/libopencv_core.so.4.2.0
+  /usr/local/lib/libopencv_highgui.so.4.2.0
+  /usr/local/lib/libopencv_imgproc.so.4.2.0
+  /usr/local/lib/libopencv_imgcodecs.so.4.2.0
   #  opencv_core
   # opencv_highgui
   # opencv_imgproc
